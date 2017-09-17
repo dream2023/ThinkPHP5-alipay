@@ -3,7 +3,7 @@ class Lotus
 {
 	/**
 	 * Lotus Option array
-	 * 
+	 *
 	 * @var array array(
 	 * 	"proj_dir"     =>
 	 * 	"app_name"     =>
@@ -41,6 +41,7 @@ class Lotus
 			{
 				trigger_error("Lotus option [app_name] is missing.");
 			}
+
 		}
 
 		/**
@@ -82,7 +83,7 @@ class Lotus
 		 * init Config
 		 */
 		$this->prepareConfig();
-		
+
 		/**
 		 * Run dispatcher when under MVC mode
 		 */

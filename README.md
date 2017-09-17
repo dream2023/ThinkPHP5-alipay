@@ -30,4 +30,15 @@
 调用 <code>\alipay\Datadownload::exec($bill_type, $bill_date)</code> 即可
 
 #### 验签 Notify.php
-调用 <code>\alipay\Notify::checkSign($params)</code> 即可
+调用 <code>\alipay\Notify::check($params)</code> 即可
+
+#### 通知处理步骤建议
+1. 验签
+2. 判断订单状态
+3. 进行业务操作
+<br />
+
+
+###### 一下两个类仅为建议, 帮助理解, 可根据具体业务进行变更
+- <code>application\common\NotifyHandler.php</code> 通知操作的处理类
+- <code>application\example\Notify.php</code> 具体实现

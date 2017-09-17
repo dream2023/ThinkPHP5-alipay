@@ -10,8 +10,30 @@ Loader::import('alipay.pay.service.AlipayTradeService');
 * 支付回调处理类
 *
 * 用法建议:
+
+1.通知校检
+$result = \alipay\Notify::check($params)
+if($result) {
+    if($_POST['trade_status'] == 'TRADE_SUCCESS') {
+        // 2.校检通过, 且支付状态为已支付后, 通过订单号, 查询订单, 并判断数据库订单状态
+        // 原因: 本次业务处理较慢, 没来得及echo 'success', 同一订单的通知多次到达, 所以有必要进行订单状态确认
+        if() {
+            // 3. 如果订单未修改过, 则进行业务处理
+
+        }
+    }
+    echo "success"; //请不要修改或删除
+} else {
+    echo "fail" //请不要修改或删除
+}
+
+
+
+
+
+
 * 1.$_POST获取参数
-* 2.调用 \alipay\Notify::checkSign($params) 进行签名校检
+* 2.调用 \alipay\Notify::check($params) 进行签名校检
 * 3.调用 \alipay\Notify::checkParams($orginParams, $orginParams) 进行参数验证
 * 4.根据 $_POST['trade_status'] 判断订单状态
 * 5.echo "success"; 或者 echo "fail";
@@ -29,29 +51,49 @@ Loader::import('alipay.pay.service.AlipayTradeService');
 class Notify
 {
     /**
-     * 检查签名
+     * 异步通知校检, 包括验签和数据库信息与通知信息对比
+     *
+     * @param array  $params 数据库中查询到的订单信息
+     * @param string $params['out_trade_no'] 商户订单
+     * @param float  $params['total_amount'] 订单金额
      */
-    public static function checkSign($params)
+    public static function check($params)
     {
+        // 1.第一步校检签名
         $config = config('alipay');
         $alipaySevice = new \AlipayTradeService($config);
-        $result = $alipaySevice->check($params);
-        return $result;
-    }
+        $signResult = $alipaySevice->check($_POST);
 
-    /**
-     * 判断两个数组是否一致, 两个数组的参数可以为如下（建议）：
-     * $params['out_trade_no'] 商户单号
-     * $params['total_amount'] 订单金额
-     * $params['app_id']       app_id号
-     */
-    public static function checkParams($orginParams, $orginParams)
-    {
-        $result = array_diff($orginParams, $orginParams);
-        if (empty($result)) {
+        // 2.和数据库信息做对比
+        $paramsResult = self::checkParams($params);
+
+        // 3.返回结果
+        if($signResult && $paramsResult) {
             return true;
         } else {
             return false;
         }
+    }
+
+    /**
+     * 判断两个数组是否一致, 两个数组的参数如下：
+     * $params['out_trade_no'] 商户单号
+     * $params['total_amount'] 订单金额
+     * $params['app_id']       app_id号
+     */
+    public static function checkParams($params)
+    {
+        $notifyArr = [
+            'out_trade_no' => $_POST['out_trade_no'],
+            'total_amount' => $_POST['total_amount'],
+            'app_id'       => $_POST['app_id'],
+        ];
+        $paramsArr = [
+            'out_trade_no' => $params['out_trade_no'],
+            'total_amount' => $params['total_amount'],
+            'app_id'       => config('alipay.app_id'),
+        ];
+        $result = array_diff_assoc($paramsArr, $notifyArr);
+        return empty($result) ? true : false;
     }
 }
