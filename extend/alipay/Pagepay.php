@@ -17,7 +17,7 @@ loader::import('alipay.pay.buildermodel.AlipayTradePagePayContentBuilder');
 * 姓名: zhangchaojie      邮箱: zhangchaojie_php@qq.com
 * 期望职位: PHP初级工程师   地点: 深圳(其他城市亦可)
 * 能力:
-*     1.熟悉小程序开发, 前后端皆可, 前端一日可做5-10个页面, 后端可写接口
+*     1.熟悉小程序开发, 前后端皆可
 *     2.后端, PHP基础知识扎实, 熟悉ThinkPHP5框架, 用TP5做过CMS, 商城, API接口
 *     3.MySQL, Linux都在进行进一步学习
 */

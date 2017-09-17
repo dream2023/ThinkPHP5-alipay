@@ -15,13 +15,12 @@ loader::import('alipay.pay.buildermodel.AlipayTradeWapPayContentBuilder');
 *
 * ----------------- 求职 ------------------
 * 姓名: zhangchaojie      邮箱: zhangchaojie_php@qq.com  应届生
-* 期望职位: PHP初级工程师 薪资: 3500  地点: 深圳(其他城市亦可)
+* 期望职位: PHP初级工程师   地点: 深圳(其他城市亦可)
 * 能力:
-*     1.熟悉小程序开发, 前后端皆可, 前端一日可做5-10个页面, 后端可写接口
+*     1.熟悉小程序开发, 前后端皆可
 *     2.后端, PHP基础知识扎实, 熟悉ThinkPHP5框架, 用TP5做过CMS, 商城, API接口
 *     3.MySQL, Linux都在进行进一步学习
 *
-* 如有大神收留, 请发送邮件告知, 必将感激涕零!
 */
 class Wappay
 {
