@@ -9,34 +9,8 @@ Loader::import('alipay.pay.service.AlipayTradeService');
 /**
 * 支付回调处理类
 *
-* 用法建议:
-
-1.通知校检
-$result = \alipay\Notify::check($params)
-if($result) {
-    if($_POST['trade_status'] == 'TRADE_SUCCESS') {
-        // 2.校检通过, 且支付状态为已支付后, 通过订单号, 查询订单, 并判断数据库订单状态
-        // 原因: 本次业务处理较慢, 没来得及echo 'success', 同一订单的通知多次到达, 所以有必要进行订单状态确认
-        if() {
-            // 3. 如果订单未修改过, 则进行业务处理
-
-        }
-    }
-    echo "success"; //请不要修改或删除
-} else {
-    echo "fail" //请不要修改或删除
-}
-
-
-
-
-
-
-* 1.$_POST获取参数
-* 2.调用 \alipay\Notify::check($params) 进行签名校检
-* 3.调用 \alipay\Notify::checkParams($orginParams, $orginParams) 进行参数验证
-* 4.根据 $_POST['trade_status'] 判断订单状态
-* 5.echo "success"; 或者 echo "fail";
+* 用法:
+* 调用 \alipay\Pagepay::pay($params) 即可
 *
 * ----------------- 求职 ------------------
 * 姓名: zhangchaojie      邮箱: zhangchaojie_php@qq.com  应届生
