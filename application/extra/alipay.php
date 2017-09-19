@@ -7,7 +7,7 @@ return [
         //应用ID,您的APPID。
         'app_id' => "",
 
-        //商户私钥
+        //商户私钥, 请把生成的私钥文件中字符串拷贝在此
         'merchant_private_key' => "",
 
         //异步通知地址
