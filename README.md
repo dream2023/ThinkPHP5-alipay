@@ -1,4 +1,4 @@
-# ThinkPHP5 电脑与手机支付扩展库（2017年7月21日）
+# ThinkPHP5 电脑与手机支付扩展库（2017年9月18日）
 
 ## 使用说明
 - 在默认配置情况下，将文件夹拷贝到根目录即可, 其中<code>extend</code>目录为支付扩展目录, <code>application\extra\alipay.php</code>为配置文件
@@ -37,7 +37,6 @@
 2. 判断订单状态
 3. 进行业务操作
 <br />
-
 ###### 一下两个类仅为建议, 帮助理解, 可根据具体业务进行变更, 详细理解可参考[官方文档和SDK](https://docs.open.alipay.com/270/105902/)
 - <code>application\common\NotifyHandler.php</code> 通知操作的处理类
 - <code>application\example\Notify.php</code> 具体实现
